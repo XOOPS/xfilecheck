@@ -1,3 +1,3 @@
 # xfilecheck
 
-**Work in Progress** File integrety checker for XOOPS 2.5
+**Work in Progress** File integrity checker for XOOPS 2.5
