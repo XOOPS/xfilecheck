@@ -1,15 +1,15 @@
 <?php
 /**
- * XOOPS installation md5 checksumminig script
+ * XOOPS installation md5 checksum file creation script
  * For developers and supporters
  *
- * This script creates allows you to check that the XOOPS system files have been correctly uploaded.
- * It reads all the XOOPS files and reports missing or invalid ones.
+ * This script creates the checksum.md5 file that allows you to check the integrity of XOOPS system files
  *
- * Instructions:
- * - Upload this script and xoops.md5 to your XOOPS documents root
- * - Access it using a browser
- * - Re-upload missing/invalid files
+ * Invocation from command line:
+ *  php checksum.create.php --root=/path/to/XoopsCore25/htdocs
+ *
+ * Or, from browser:
+ *  http://site/url/path/checksum.create.php?root=/path/to/XoopsCore25/htdocs
  *
  * @copyright (c) 2000-2016 XOOPS Project (www.xoops.org)
  * @license   GNU GPL 2 (http://www.gnu.org/licenses/gpl-2.0.html)
@@ -29,8 +29,15 @@ $skip = array(
     'words'     => array(),
     'pattern'   => '',
     );
-if (isset($_GET['root']) && false === strpos($_GET['root'], '..')) {
-    $root = $_GET["root"];
+
+if (php_sapi_name() === 'cli') {
+    $options = getopt('', array('root::'));
+} else {
+    $options = $_GET;
+}
+
+if (isset($options['root']) && false === strpos($options['root'], '..')) {
+    $root = $options['root'];
 } else {
     $skip_words = array(
         'cache', 'extras', 'templates_c', /*'uploads', 'themes',*/
