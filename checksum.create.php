@@ -11,11 +11,10 @@
  * Or, from browser:
  *  http://site/url/path/checksum.create.php?root=/path/to/XoopsCore25/htdocs
  *
- * @copyright (c) 2000-2016 XOOPS Project (www.xoops.org)
+ * @copyright 2000-2016 XOOPS Project (www.xoops.org)
  * @license   GNU GPL 2 (http://www.gnu.org/licenses/gpl-2.0.html)
  * @author    Skalpa Keo <skalpa@xoops.org>
  * @author    phppp <phppp@user.sourceforge.net>
- * @since     2.0.17
  * @package   xfilecheck
  */
 

@@ -1,23 +1,28 @@
 <?php
 /**
-* XOOPS installation md5 checksumminig script
-*
-* This script allows you to check that the XOOPS system files have been correctly uploaded.
-* It reads all the XOOPS files and reports missing or invalid ones.
-*
-* Instructions:
-* - Upload this script and xoops.md5 to your XOOPS documents root
-* - Access it using a browser
-* - Re-upload missing/invalid files
-*
-* @copyright    The XOOPS Project http://xoops.sf.net/
-* @license      http://www.fsf.org/copyleft/gpl.html GNU public license
-* @author       Skalpa Keo <skalpa@xoops.org>
-* @author       phppp <phppp@users.sourceforge.net>
-* @since        2.0.14
-* @version      $Id $
-* @package      xoops
-*/
+ * XOOPS installation checksum verification script
+ *
+ * This script allows you to check that the XOOPS system files have been correctly uploaded.
+ * It reads all the XOOPS files and reports missing or invalid ones.
+ *
+ *
+ * Invocation from command line:
+ *  php checksum.create.php --root=/path/to/XoopsCore25/htdocs
+ *
+ * Or, from browser:
+ *  http://site/url/path/checksum.php?root=/path/to/XoopsCore25/htdocs
+ *
+ * or follow the legacy method instructions:
+ * - Upload this script and xoops.md5 to your XOOPS documents root
+ * - Access it using a browser
+ * - Re-upload missing/invalid files
+ *
+ * @copyright 2000-2016 XOOPS Project (www.xoops.org)
+ * @license   GNU GPL 2 (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author    Skalpa Keo <skalpa@xoops.org>
+ * @author    phppp <phppp@users.sourceforge.net>
+ * @package   xfilecheck
+ */
 
 error_reporting(0);
 
@@ -25,13 +30,23 @@ header("Content-type: text/plain");
 
 $md5_file = __DIR__ . '/checksum.md5';
 $root = (is_dir('./htdocs') ? './htdocs' : '.');
-if (isset($_GET['root']) && false === strpos($_GET['root'], '..')) {
-    $root = $_GET['root'];
+
+if (php_sapi_name() === 'cli') {
+    $options = getopt('', array('root::'));
+} else {
+    $options = $_GET;
 }
+
+if (isset($options['root']) && false === strpos($options['root'], '..')) {
+    $root = $options['root'];
+}
+
 $num_files = check_folder($root);
 
 echo "There are {$num_files} files checked.\n";
-echo "Please remove the file $md5_file and ".basename(__FILE__)." as soon as possible.\n";
+if ($root === './htdocs' || $root === '.') {
+    echo "Please remove the file $md5_file and " . basename(__FILE__) . " as soon as possible.\n";
+}
 
 /**
  * Check the file checksum as specified in $line
