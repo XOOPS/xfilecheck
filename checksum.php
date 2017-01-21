@@ -7,13 +7,13 @@
  *
  *
  * Invocation from command line:
- *  php checksum.create.php --root=/path/to/XoopsCore25/htdocs
+ *  php checksum.php --root=/path/to/XoopsCore25/htdocs
  *
  * Or, from browser:
  *  http://site/url/path/checksum.php?root=/path/to/XoopsCore25/htdocs
  *
  * or follow the legacy method instructions:
- * - Upload this script and xoops.md5 to your XOOPS documents root
+ * - Upload this the checksum.php script and checksum.md5 to your XOOPS documents root
  * - Access it using a browser
  * - Re-upload missing/invalid files
  *
