@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "$1" != "" ]; then
+    rm -rf xoopswork
+    git clone --branch "$1" --depth 1 https://github.com/XOOPS/XoopsCore25.git xoopswork
+    php checksum.create.php --root=xoopswork/htdocs
+else
+    echo "Specify the release version tag"
+fi
+
