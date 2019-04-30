@@ -12,7 +12,7 @@ This script allows you to check that the XOOPS system files have been correctly 
 
 ## Checking Files
 
-### Basic legacy method instructions
+### Traditional method instructions
 - Upload the checksum.php script and checksum.md5 from the downloaded archive file to your XOOPS documents root
 - Access http://(yourxoopssite)/checksum.php using your browser
 - Correct any issues reported by re-uploading missing or invalid files
